@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<style>
+input.search {
+    width: 5em;  height: 4em;
+}
+.big{ width: 1em; height: 1em; }
+</style>
+
+
+<head>
+  <title>视频标注</title>
+</head>
+<body>
+  <!-- <h2>请标注视频.</h2> -->
+  <a href="examples">示例视频</a><br>
+  <video width="640" height="360" controls autoplay>
+    <source src={{ video }} type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+<form method="POST">
+  <!-- <input type="hidden" name="id" value="{{id}}"> -->
+  <input type="hidden" name="origin_id" value="{{origin_id}}">
+
+  <!-- <p style="font-size:4vh;"><b>score</b></p> -->
+  <!--
+  <b style="font-size:3vh;">是否由多段视频组成</b><br>
+  <input type="radio" name="mult-clip" value="1" class="big"><label style="font-size:3vh;">是</label>
+  <input type="radio" name="mult-clip" value="2" class="big" checked=""><label style="font-size:3vh;">否</label><br>-->
+
+  <b style="font-size:3vh;">视频类别</b> <br>
+  <input type="radio" name="score" value="1" class="big"><label style="font-size:3vh;">正样本</label>
+  <input type="radio" name="score" value="2" class="big"><label style="font-size:3vh;">不确定</label>
+  <input type="radio" name="score" value="3" class="big"><label style="font-size:3vh;">负样本</label><br>
+
+  <b style="font-size:3vh;">运动类型</b><br>
+  <input id="checkbox1" type="checkbox" name="scene" value="1" class="big"><label for="checkbox1" style="font-size:3vh;">云</label>
+  <input id="checkbox2" type="checkbox" name="scene" value="2" class="big"><label for="checkbox2" style="font-size:3vh;">星空</label>
+  <input id="checkbox3" type="checkbox" name="scene" value="3" class="big"><label for="checkbox3" style="font-size:3vh;">水(海洋湖面)</label>
+  <input id="checkbox4" type="checkbox" name="scene" value="4" class="big"><label for="checkbox4" style="font-size:3vh;">瀑布溪流</label>
+  <input id="checkbox5" type="checkbox" name="scene" value="5" class="big"><label for="checkbox5" style="font-size:3vh;">田野草地</label>
+  <input id="checkbox13" type="checkbox" name="scene" value="13" class="big"><label for="checkbox13" style="font-size:3vh;">树木</label>
+  <input id="checkbox6" type="checkbox" name="scene" value="6" class="big"><label for="checkbox6" style="font-size:3vh;">车流</label><br>
+  <input id="checkbox7" type="checkbox" name="scene" value="7" class="big"><label for="checkbox7" style="font-size:3vh;">人群</label>
+  <input id="checkbox8" type="checkbox" name="scene" value="8" class="big"><label for="checkbox8" style="font-size:3vh;">花开</label>
+  <input id="checkbox9" type="checkbox" name="scene" value="9" class="big"><label for="checkbox9" style="font-size:3vh;">腐烂</label>
+  <input id="checkbox10" type="checkbox" name="scene" value="10" class="big"><label for="checkbox10" style="font-size:3vh;">融化</label>
+  <input id="checkbox11" type="checkbox" name="scene" value="11" class="big"><label for="checkbox11" style="font-size:3vh;">烟</label>
+  <input id="checkbox12" type="checkbox" name="scene" value="12" class="big"><label for="checkbox12" style="font-size:3vh;">其它</label>
+  <input type="text" name="text"> 多个其他类别请用空格隔开
+  <br>
+
+  <input class="search" type="submit" name="submit_button" value="提交">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  {% endwith %}
+  {% block body %}{% endblock %}
+</form>
+
+
+
+</body>
+</html>
