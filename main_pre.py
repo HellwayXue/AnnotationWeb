@@ -5,7 +5,9 @@ import sys
 import requests
 from flask import request, render_template, redirect, url_for, session, flash
 app = Flask(__name__)
-
+import os
+if not os.path.exists("static/"):
+    os.makedirs("static/")
 
 videos = pickle.load(open("videos_name.pkl", "rb"))
 examples = pickle.load(open("examples_name.pkl", "rb"))
@@ -50,7 +52,7 @@ def hello_world():
                         result_dict[origin_id].append([videos[index], request.form["score"], request.form.getlist("scene"), text])
                     else:
                         result_dict[origin_id]= [[videos[index], request.form["score"], request.form.getlist("scene"), text]]
-                    with open("result.txt", "a") as f:
+                    with open("static/result.txt", "a") as f:
                         f.write('id: {}, video: {}, label:{}, scene:{}, other:{}'.format(origin_id, videos[index], request.form["score"], request.form.getlist("scene"), text) + '\n')
                     index = global_dict[origin_id]+1
                     global_dict[origin_id] = index
@@ -59,7 +61,7 @@ def hello_world():
                     result_dict[origin_id].append([videos[index], request.form["score"], request.form.getlist("scene"), "None"])
                 else:
                     result_dict[origin_id]= [[videos[index], request.form["score"], request.form.getlist("scene"), "None"]]
-                with open("result.txt", "a") as f:
+                with open("static/result.txt", "a") as f:
                     f.write('id: {}, video: {}, label:{}, scene:{}, other:{}'.format(origin_id, videos[index], request.form["score"], request.form.getlist("scene"), "None") + '\n')
                 index = global_dict[origin_id]+1
                 global_dict[origin_id] = index
@@ -69,7 +71,7 @@ def hello_world():
                 result_dict[origin_id].append([videos[index], request.form["score"], "None", "None"])
             else:
                 result_dict[origin_id]= [[videos[index], request.form["score"], "None", "None"]]
-            with open("result.txt", "a") as f:
+            with open("static/result.txt", "a") as f:
                 f.write('id: {}, video: {}, label:{}, scene:{}, other:{}'.format(origin_id, videos[index], request.form["score"], "None", "None") + '\n')
             index = global_dict[origin_id]+1
             global_dict[origin_id] = index
@@ -104,7 +106,7 @@ def hello_world():
 
 @app.route('/request')
 def my_request():
-    pickle.dump(result_dict, open("result_dict.pkl", "wb"))
+    pickle.dump(result_dict, open("static/result_dict.pkl", "wb"))
     return str(result_dict)
 
 @app.route('/result')
