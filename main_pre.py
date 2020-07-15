@@ -16,7 +16,7 @@ video_per_person=100
 global_dict = {}
 result_dict = {}
 error_list = []
-SHARED = 1
+SHARED = 4
 link = "https://loopingvideos.blob.core.windows.net/videos/flickr_dataset_resize/"
 link = "https://loopingvideo.oss-cn-beijing.aliyuncs.com/flickr_dataset_resize/"
 
@@ -113,7 +113,7 @@ def my_request():
 def result_count():
     score_dict={"1":"正样本", "2":"不确定", "3":"负样本"}
     print_str = ''
-    my_label = minelabels[2]
+    my_label = minelabels[5]
     my_dict = {}
     for i in my_label:
         my_dict[i[0]] = int(i[1])
