@@ -11,7 +11,7 @@ if not os.path.exists("static/"):
 
 videos = pickle.load(open("videos_name.pkl", "rb"))
 examples = pickle.load(open("examples_name.pkl", "rb"))
-video_per_person=100
+video_per_person=1000
 global_dict = {}
 result_dict = {}
 error_list = []
@@ -95,6 +95,7 @@ def hello_world():
 
 @app.route('/request')
 def my_request():
+    pickle.dump(global_dict, open("static/global_dict.pkl", "wb"))
     pickle.dump(result_dict, open("static/result_dict.pkl", "wb"))
     return str(result_dict)
 
